@@ -1,0 +1,13 @@
+.section {
+  padding: 8.2rem 3.2rem;
+}
+/* .section:nth-child(odd), */
+
+.sectionBorder:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+@media only screen and (max-width: 37.5em) {
+  .section {
+    padding: 8.2rem 1.4rem;
+  }
+}

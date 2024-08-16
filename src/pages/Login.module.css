@@ -1,0 +1,21 @@
+.loginSection {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+  width: 100%;
+}
+.login {
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.1);
+  padding: 6.4rem 3.2rem;
+  border-radius: var(--border-radius);
+  width: 50rem;
+  margin: 6.4rem auto;
+}
+@media only screen and (max-width: 52.5em) {
+  .login {
+    width: 90%;
+  }
+}

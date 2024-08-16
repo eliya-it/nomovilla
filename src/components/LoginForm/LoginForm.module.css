@@ -1,0 +1,7 @@
+.formText {
+  font-size: 1.8rem;
+}
+.formLink {
+  text-decoration: none;
+  color: var(--color--primary);
+}

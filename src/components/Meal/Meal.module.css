@@ -1,0 +1,78 @@
+.meal {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20rem;
+
+  transition: var(--transition-primary);
+}
+.meal:hover {
+  transform: translateY(-0.7rem);
+}
+.mealBox {
+  width: 100%;
+  height: 100%;
+}
+.mealImg {
+  width: 100%;
+
+  object-fit: cover;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+.mealText {
+  padding: 0.4rem 3.2rem 2.2rem 3.2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+  background-color: var(--color-grey-light-1);
+}
+.mealHeading {
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.mealCategory {
+  align-self: center;
+  padding: 0.8rem;
+  border-radius: 200rem;
+  font-weight: 700;
+  background-color: #f59f00;
+}
+.mealCategoryVegan {
+  background-color: #12b886;
+}
+.mealTags {
+  padding: 0.8rem;
+
+  color: var(--color-grey-light-1);
+  align-self: flex-start;
+  background-color: var(--color--primary-dark-1);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 1.45rem;
+  border-radius: 200rem;
+}
+
+.mealActions {
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+  gap: 3.2rem;
+}
+.mealLink {
+  display: inline-block;
+  background-color: var(--color--primary-light-4);
+  color: var(--color--primary-dark-4);
+  padding: 1.2rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-size: var(--font-size-1);
+  text-align: center;
+  flex: 1;
+}

@@ -1,0 +1,13 @@
+.mealsSearch {
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+  margin: 4.2rem 0;
+  border-radius: var(--border-radius);
+  padding: 3.2rem;
+  text-align: center;
+}
+.mealsSearch > *:not(:last-child) {
+  margin-bottom: 3.2rem;
+}
+.mealsText {
+  font-size: 2rem;
+}

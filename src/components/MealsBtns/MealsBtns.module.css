@@ -1,0 +1,29 @@
+.btnsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.btn {
+  outline: none;
+  padding: 1.6rem;
+  border-radius: 50%;
+  font-size: 2.4rem;
+  border: none;
+  color: var(--color-grey-light-1);
+  text-align: center;
+  background-color: var(--color--primary);
+  cursor: pointer;
+  margin: 0 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-primary);
+}
+.btn:active {
+  transform: translateY(-3px);
+}
+.btn:disabled {
+  background-color: var(--color--primary-light-1);
+}
+.btn:hover {
+}

@@ -1,0 +1,42 @@
+.bookmark {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 3.2rem;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.05);
+  border-radius: var(--border-radius);
+  align-items: center;
+  transition: var(--transition-primary);
+  font-size: 2rem;
+}
+@media only screen and (max-width: 62.5em) {
+  .bookmark {
+    grid-template-columns: 2fr 2fr 1fr;
+  }
+}
+.photoBox {
+  height: 14rem;
+}
+/* .bookmark:hover {
+  transform: scale(1.02);
+} */
+.bookmarkPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+.bookmarkText {
+  padding: 3.2rem;
+}
+.bookmarkBtn {
+  background-color: transparent;
+  border: none;
+  color: var(--color-warn);
+  justify-self: end !important;
+  padding: 1.2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  margin-right: 2rem;
+  font-size: 2.4rem;
+}

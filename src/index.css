@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+body {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color--primary-dark-2),
+    var(--color--primary-dark-1)
+  );
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Open Sans", sans-serif;
+}
+
+::selection {
+  background-color: var(--color--primary-dark-1);
+  color: var(--color--primary-light-4);
+}
+
+@media only screen and (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media only screen and (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
+}

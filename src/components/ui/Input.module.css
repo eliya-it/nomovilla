@@ -1,0 +1,31 @@
+.input {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 1.2rem 1rem;
+  border-radius: var(--border-radius);
+  color: var(--color-grey-dark-1);
+  font-size: var(--font-size-1);
+  outline: 0.4rem solid transparent;
+  transition: all 500ms ease;
+  box-shadow: 0 2rem 6rem rgba(var(--color-black), 0.05);
+  flex: 1;
+}
+.input:focus {
+  color: currentColor;
+  transform: translateY(-0.3rem);
+}
+
+.input::placeholder {
+  color: #ccc;
+}
+.input:placeholder-shown {
+  color: currentColor;
+}
+.label {
+  font-size: 1.7rem;
+  display: block;
+  padding-bottom: 1rem;
+}
+.control {
+  width: 100%;
+}

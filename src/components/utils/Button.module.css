@@ -1,0 +1,46 @@
+.btn,
+.btn:link,
+.btn:visited {
+  border: none;
+  display: inline-block;
+  padding: 1.8rem 3.2rem;
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  font-size: var(--font-size-1);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+  width: 100%;
+}
+.btn:disabled {
+  background-color: var(--color-grey-light-2);
+  color: var(--color-grey-dark-1);
+  cursor: not-allowed;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.btnPrimary {
+  color: var(--color-grey-light-1);
+  background-color: var(--color--primary);
+}
+.btnRow {
+  align-self: flex-end;
+}
+.u-button {
+  background-color: transparent;
+  color: var(--color--primary);
+  padding: 1.6rem;
+  font-size: 2.4rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-primary);
+  display: inline-block;
+  text-align: center;
+}
+/* .btn:active {
+  transform: scale(0.8);
+}
+.btn:hover {
+  background-color: var(--color--primary-light-4);
+} */

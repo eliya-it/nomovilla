@@ -1,0 +1,8 @@
+.list {
+  display: flex;
+  list-style: none;
+  gap: 1.2rem;
+}
+.colList {
+  flex-direction: column;
+}

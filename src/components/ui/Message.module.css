@@ -1,0 +1,21 @@
+.message {
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.8rem 1.2rem;
+  font-size: 2rem;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(1rem);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  top: 4rem;
+  right: 4rem;
+  flex-direction: column;
+  gap: 3.2rem;
+  cursor: pointer;
+}
+.messageError {
+  background-color: #f03e3e;
+  color: var(--color-grey-light-1);
+}

@@ -1,0 +1,10 @@
+.deleteBtn {
+  background-color: var(--color-warn);
+  padding: 3.2rem;
+  outline: none;
+  border: none;
+  color: var(--color-grey-light-1);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-1);
+  cursor: pointer;
+}

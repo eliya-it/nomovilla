@@ -1,0 +1,90 @@
+.meal {
+  display: flex;
+  flex-direction: column;
+  /* gap: 3.2rem; */
+}
+.photoBox {
+  height: 50vh;
+
+  position: relative;
+}
+.headingBox {
+  transform: skewX(8deg);
+  background-color: #e09118;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+
+  left: 50%;
+  transform: translate(-50%, 50%) skewX(-20deg);
+}
+.heading {
+  font-size: 3.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: skewX(20deg);
+  color: var(--color-grey-light-2);
+  padding: 2.2rem;
+}
+.instructionsHeading {
+  margin-top: 6.4rem;
+  font-size: 2.4rem;
+}
+
+.mealPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(80%);
+}
+
+.ingredientsBox {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ingredients {
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  place-items: center;
+  gap: 2.2rem;
+}
+.mealInstructions {
+  grid-column: 1 /-1;
+}
+
+.mealInstructions {
+  font-size: 2rem;
+  padding: 2.4rem 3.2rem;
+}
+.mealcta {
+  margin: 2rem;
+  text-align: center;
+}
+.mealactions {
+  justify-self: center;
+  padding: 1.2rem;
+}
+.mealbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 1.8rem;
+  border: none;
+  color: #86570e;
+  background-color: #f6e0be;
+  font-size: 2.4rem;
+  margin: 1.4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: auto;
+  transition: var(--transition-primary);
+}
+
+.mealbtn:hover {
+  transform: translateY(-3px);
+}

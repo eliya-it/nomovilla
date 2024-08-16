@@ -1,0 +1,137 @@
+.sidebar {
+  background-color: var(--color-grey-dark-3);
+  flex: 0 0 18%;
+  min-height: 80vh;
+  display: flex;
+  position: relative;
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-grey-light-1);
+  border-bottom-left-radius: var(--border-radius);
+}
+@media only screen and (max-width: 75em) {
+  .sidebar {
+    flex: 0 0 20%;
+  }
+}
+
+.sidebarItem {
+  padding: 1.4rem 0;
+}
+.activeItem {
+  background-color: var(--color--primary);
+}
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: currentColor;
+  font-size: 1.8rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.sidebarList {
+  padding-top: 6.4rem;
+}
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: currentColor;
+}
+.menu {
+  position: fixed;
+  top: 4rem;
+  right: 4rem;
+  background-color: #000;
+}
+.menuBtn {
+  position: fixed;
+  padding: 1.2rem;
+  color: var(--color-grey-dark-3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  top: 4rem;
+  right: 4rem;
+  outline: none;
+  z-index: 1000;
+  font-size: 3.4rem;
+  background-color: var(--color-grey-light-1);
+  cursor: pointer;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.overlay {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 0;
+  right: -30%;
+  z-index: -1 !important;
+  transition: transform 1s ease;
+
+  backdrop-filter: blur(0.5rem);
+}
+.overlayScaled {
+  transform: scale(100);
+}
+.logoutBtn {
+  background-color: transparent;
+  color: var(--color-grey-light-1);
+  border: none;
+  font-size: var(--font-size-1);
+
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: var(--color-warn);
+  padding: 2.2rem;
+  cursor: pointer;
+  transition: var(--transition-primary);
+}
+.logoutBtn:hover {
+  transform: translateY(-3px);
+}
+@media only screen and (max-width: 52.5em) {
+  .sidebar {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+  }
+  .sidebarList {
+    padding-top: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: all 0.45s ease 0.2s;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .menuBtn {
+    display: flex;
+  }
+}
+.sidebarListActive {
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
+  /* right: 0; */
+}

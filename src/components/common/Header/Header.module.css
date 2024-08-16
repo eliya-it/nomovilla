@@ -1,0 +1,11 @@
+.header {
+  padding: 1.4rem 2rem;
+  height: 7.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f3f3f3;
+}
+.logo {
+  height: 3.2rem;
+}

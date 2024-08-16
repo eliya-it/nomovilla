@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+.arrow {
+  border: 0;
+  width: 6rem;
+  height: 6rem;
+  text-align: center;
+  border-radius: 200rem;
+  cursor: pointer;
+}
+
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 2.4rem;
+}
+
+.nextArrow {
+  background-color: var(--color--primary-light-1);
+  color: var(--color--primary-dark-4);
+}

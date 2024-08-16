@@ -1,0 +1,28 @@
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.btnsContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.btn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.yes {
+  color: rgb(24, 131, 65);
+}
+.no {
+  color: var(--color-warn);
+}
+.message {
+  font-weight: var(--font-weight-3);
+  font-size: var(--font-size-1);
+}

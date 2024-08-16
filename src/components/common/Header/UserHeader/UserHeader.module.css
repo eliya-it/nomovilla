@@ -1,0 +1,34 @@
+.authLink {
+  text-decoration: none;
+  color: currentColor;
+  font-size: var(--font-size);
+  display: flex;
+  align-items: center;
+  gap: 2000px;
+  /* gap: 3.2rem; */
+  font-size: 1.8rem;
+  transition: var(--transition-primary);
+}
+.authLink:hover {
+  transform: translateY(-0.3rem);
+}
+.username {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-grey-dark-1);
+}
+.userHeader {
+  gap: 1rem;
+  text-decoration: none;
+  color: currentColor;
+}
+
+.userLink,
+.userLink:link,
+.userLink:visited {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: currentColor;
+}
