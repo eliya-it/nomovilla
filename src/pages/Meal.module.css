@@ -11,10 +11,11 @@
 .headingBox {
   transform: skewX(8deg);
   background-color: #e09118;
+  color: #f6e0be;
   position: absolute;
   z-index: 10;
   bottom: 0;
-
+  line-height: 1;
   left: 50%;
   transform: translate(-50%, 50%) skewX(-20deg);
 }

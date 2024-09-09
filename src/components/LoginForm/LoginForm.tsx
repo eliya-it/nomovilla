@@ -21,9 +21,11 @@ const LoginForm: FunctionComponent<Props> = ({
       <Input
         label="Email"
         placeholder="user@nomovilla.com"
+        type="email"
         id="email"
         name="email"
         onChange={dataCb}
+        required
       />
       <Input
         label="Password"

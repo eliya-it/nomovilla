@@ -14,8 +14,7 @@
   color: currentColor;
   transform: translateY(-0.3rem);
 }
-
-.input::placeholder {
+v .input::placeholder {
   color: #ccc;
 }
 .input:placeholder-shown {
@@ -26,6 +25,11 @@
   display: block;
   padding-bottom: 1rem;
 }
-.control {
+.formControl {
   width: 100%;
+}
+
+.error {
+  color: var(--color-warn);
+  font-size: 1.4rem;
 }

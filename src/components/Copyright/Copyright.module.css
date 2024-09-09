@@ -8,9 +8,10 @@
   flex-direction: column;
   gap: 1.2rem;
   align-items: center;
+  justify-content: center;
 }
 .copyrightText {
-  text-decoration: none;
+  line-height: 1.4;
 }
 @media only screen and (max-width: 52.5em) {
   .copyright {

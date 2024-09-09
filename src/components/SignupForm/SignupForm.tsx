@@ -26,6 +26,7 @@ const SignupForm: React.FC<Props> = ({
       <Input
         placeholder="user@example.com"
         label="Email"
+        type="email"
         name="email"
         onChange={handleUserData}
       />

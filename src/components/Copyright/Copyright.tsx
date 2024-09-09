@@ -3,29 +3,30 @@ import { copyright, copyrightText } from "./Copyright.module.css";
 import List from "@components/utils/List";
 import Item from "@components/utils/Item";
 import {
-  AiFillInstagram,
-  AiFillTwitterSquare,
   AiOutlineGlobal,
+  AiOutlineInstagram,
+  AiOutlineX,
 } from "react-icons/ai";
 import CopyrightLink from "./CopyrightLink";
 const Copyright: FunctionComponent = () => {
   return (
     <div className={copyright}>
       <p className={copyrightText}>
-        This project was built by me for my portfolio
+        This project was developed by <strong>Eliya</strong> as part of his
+        portfolio. <br /> &copy; All rights reserved.
       </p>
       <List>
-        <CopyrightLink to="https://www.markovdev.com/">
+        <CopyrightLink to="https://www.eliyait.com/">
           <AiOutlineGlobal />
         </CopyrightLink>
         <Item>
-          <CopyrightLink to="https://instagram.com/markov.dev?igshid=MzRlODBiNWFlZA==">
-            <AiFillInstagram />
+          <CopyrightLink to="https://instagram.com/eliya_it">
+            <AiOutlineInstagram />
           </CopyrightLink>
         </Item>
         <Item>
-          <CopyrightLink to="https://twitter.com/markov_dev">
-            <AiFillTwitterSquare />
+          <CopyrightLink to="https://x.com/eliya_it">
+            <AiOutlineX />
           </CopyrightLink>
         </Item>
       </List>

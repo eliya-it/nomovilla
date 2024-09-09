@@ -20,8 +20,12 @@ import useAsync from "@hooks/useAsync";
 import Message from "@ui/Message";
 import usePasswordValidator from "@hooks/usePasswordValidator";
 interface UserData {
-  name: string | null;
-  email: string | null;
+  name: string;
+  email: string;
+  curPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  token: string;
 }
 const ChangeUserPassword: FunctionComponent = () => {
   const [user, setUser] = useLocalStorage<UserData>("user");
@@ -29,16 +33,18 @@ const ChangeUserPassword: FunctionComponent = () => {
   const { handleFirebaseErr } = useFirebaseError();
 
   const [userData, setUserData] = useState<UserData>({
+    name: user?.name,
+    email: user?.email,
     curPassword: "",
     newPassword: "",
     confirmNewPassword: "",
-    token: "",
+    token: user?.token || "",
   });
 
   const passwordValidation = usePasswordValidator(
-    userData.curPassword,
-    userData.newPassword,
-    userData.confirmNewPassword
+    userData.curPassword as string,
+    userData.newPassword as string,
+    userData.confirmNewPassword as string
   );
 
   const handleUserData = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,25 +60,24 @@ const ChangeUserPassword: FunctionComponent = () => {
       });
 
       const curUser = auth.currentUser;
-      const cred = EmailAuthProvider.credential(
-        curUser.email,
-        userData.curPassword
-      );
-      const { user } = await reauthenticateWithCredential(curUser, cred);
-      console.log(user);
-      setUser({
-        name: user.displayName,
-        email: user.email,
-        token: user?.accessToken,
-        expiresIn: auth.currentUser.stsTokenManager.expirationTime,
-      });
-
-      await updatePassword(curUser, userData.newPassword);
-
-      dispatch({
-        type: "RESPONSE",
-        message: "Password updated successfully!",
-      });
+      if (curUser) {
+        const cred = EmailAuthProvider.credential(
+          curUser.email as string,
+          userData.curPassword
+        );
+        const { user } = await reauthenticateWithCredential(curUser, cred);
+        setUser({
+          name: user.displayName || "",
+          email: user.email || "",
+          token: user?.accessToken || "",
+          expiresIn: auth.currentUser?.stsTokenManager.expirationTime,
+        });
+        await updatePassword(curUser, userData.newPassword);
+        dispatch({
+          type: "RESPONSE",
+          message: "Password updated successfully!",
+        });
+      }
     } catch (err) {
       dispatch({
         type: "ERROR",

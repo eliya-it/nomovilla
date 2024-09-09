@@ -31,7 +31,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       disabled={disabled}
     >
       {isLoading ? "Loading..." : text}
-      {children}
+      {/* {children} */}
     </button>
   );
 };

@@ -55,7 +55,6 @@ const reducer = <T>(
     case "CLEAR":
       return initialState;
     default:
-      console.error("[-] Should not get here...");
       return state; // Return the current state if the action type is unknown
   }
 };

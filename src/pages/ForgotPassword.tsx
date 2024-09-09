@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { forgotPassword } from "./ForgotPassword.module.css";
 import Input from "@ui/Input";
 import Form from "@ui/Form";
@@ -11,13 +11,17 @@ import useFirebaseError from "@hooks/useFirebaseError";
 import Message from "@ui/Message";
 
 const ForgotPassword: FunctionComponent = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { handleFirebaseErr, error } = useFirebaseError();
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       await sendPasswordResetEmail(auth, auth.currentUser?.email || "");
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       handleFirebaseErr(err);
     }
   };
@@ -29,8 +33,8 @@ const ForgotPassword: FunctionComponent = () => {
         <h3 className="heading--tertiary">Forgot your password?</h3>
         <Heading isForth>Enter your email below to reset it.</Heading>
         <Form onSubmit={handleForgotPassword} isCol>
-          <Input placeholder="user@nomovilla.com" type="search" id="name" />
-          <Button text={"Submit"} />
+          <Input placeholder="user@nomovilla.com" type="email" id="name" />
+          <Button text="Submit" isLoading={isLoading} />
         </Form>
       </div>
     </Section>

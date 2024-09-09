@@ -30,11 +30,12 @@
   background-color: var(--color-grey-light-1);
 }
 .mealHeading {
-  font-size: 3rem;
+  font-size: 2.6rem;
   font-weight: 600;
   text-align: center;
   width: 80%;
   margin: 0 auto;
+  line-height: 0.8;
 }
 .mealCategory {
   align-self: center;
