@@ -1,5 +1,5 @@
-import React, { FunctionComponent, MouseEventHandler } from "react";
-import { pagination, arrow, icon, nextArrow } from "./Pagination.module.css";
+import { FunctionComponent, MouseEventHandler } from "react";
+import PaginationCl from "./Pagination.module.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 interface Props {
   next: MouseEventHandler<HTMLButtonElement>;
@@ -16,18 +16,22 @@ const Pagination: FunctionComponent<Props> = ({
   activePrev,
 }) => {
   return (
-    <div className={pagination}>
+    <div className={PaginationCl.pagination}>
       <button
-        className={`${arrow} ${activePrev ? nextArrow : ""}`}
+        className={`${PaginationCl.arrow} ${
+          activePrev ? PaginationCl.nextArrow : ""
+        }`}
         onClick={prev}
       >
-        <MdChevronLeft className={icon} />
+        <MdChevronLeft className={PaginationCl.icon} />
       </button>
       <button
-        className={`${arrow} ${activeNext ? nextArrow : ""}`}
+        className={`${PaginationCl.arrow} ${
+          activeNext ? PaginationCl.nextArrow : ""
+        }`}
         onClick={next}
       >
-        <MdChevronRight className={icon} />
+        <MdChevronRight className={PaginationCl.icon} />
       </button>
     </div>
   );

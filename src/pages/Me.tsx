@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import ChangeUserInfo from "@components/ChangeUserInfo/ChangeUserInfo";
 import ChangeUserPassword from "@components/ChangeUserPassword/ChangeUserPassword";
 import DeleteUser from "@components/DeleteUser/DeleteUser";

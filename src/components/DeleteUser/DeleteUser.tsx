@@ -1,13 +1,13 @@
-import React, { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 
-import { v4 as uuid } from "uuid";
 import { deleteUser } from "firebase/auth";
 import { auth } from "@/firebase";
-import { deleteBtn } from "./DeleteUser.module.css";
+import DeleteUserCl from "./DeleteUser.module.css";
 import { useNavigate } from "react-router-dom";
 import Section from "@components/utils/Section";
 import useAuthContext from "@hooks/useAuthContext";
 import useFirebaseError from "@hooks/useFirebaseError";
+import Message from "../ui/Message";
 
 const DeleteUser: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -15,13 +15,14 @@ const DeleteUser: FunctionComponent = () => {
   const { handleFirebaseErr, error } = useFirebaseError();
   const handleDelete = async () => {
     try {
-      await deleteUser(auth?.currentUser);
-      localStorage.removeItem("user");
-
-      dispatch({
-        type: "DELETE",
-      });
-      navigate("/");
+      if (auth.currentUser) {
+        await deleteUser(auth.currentUser);
+        localStorage.removeItem("user");
+        dispatch({
+          type: "DELETE",
+        });
+        navigate("/");
+      }
     } catch (err) {
       handleFirebaseErr(err);
     }
@@ -29,7 +30,8 @@ const DeleteUser: FunctionComponent = () => {
 
   return (
     <Section>
-      <button onClick={handleDelete} className={deleteBtn}>
+      {error && <Message status="fail" message={error} />}
+      <button onClick={handleDelete} className={DeleteUserCl.deleteBtn}>
         Delete Your Account
       </button>
     </Section>

@@ -1,20 +1,20 @@
 import { useCallback, useReducer } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 interface State<T = any> {
   loading: boolean | null;
-  error: AxiosError | null;
+  error: string | null; // Change to a string to hold standardized error messages
   data: T | null;
   extra: any;
   identifier: string | null;
 }
-// Define the action types
+
 type Action<T = any> =
   | { type: "SEND"; identifier: string | null }
   | { type: "RESPONSE"; resData: T; extra?: any }
-  | { type: "ERROR"; error: AxiosError }
+  | { type: "ERROR"; error: string } // Change to string
   | { type: "CLEAR" };
-// Initial state
+
 const initialState: State = {
   loading: null,
   error: null,
@@ -22,7 +22,7 @@ const initialState: State = {
   extra: null,
   identifier: null,
 };
-// Reducer function
+
 const httpReducer = <T>(state: State<T>, action: Action<T>): State<T> => {
   switch (action.type) {
     case "SEND":
@@ -43,7 +43,7 @@ const httpReducer = <T>(state: State<T>, action: Action<T>): State<T> => {
     case "ERROR":
       return {
         ...state,
-        error: action.error,
+        error: action.error, // Store the standardized error message
         loading: false,
       };
     case "CLEAR":
@@ -79,17 +79,14 @@ const useHttp = <T = any>() => {
           extra: requestExtra,
         });
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          dispatchHttp({
-            type: "ERROR",
-            error,
-          });
-        } else {
-          dispatchHttp({
-            type: "ERROR",
-            error: new AxiosError("An unexpected error occurred"),
-          });
+        let errorMessage = "An unexpected error occurred."; // Default message
+        if (axios.isAxiosError(error) && error.response) {
+          errorMessage = error.response.data?.error || errorMessage; // Adjust this based on your API's error structure
         }
+        dispatchHttp({
+          type: "ERROR",
+          error: errorMessage, // Dispatch the standardized error message
+        });
       }
     },
     []

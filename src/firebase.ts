@@ -1,7 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { getAuth } from "firebase/auth";
+import { getAuth, User as FirebaseUser } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY as string,
@@ -12,6 +12,23 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID as string,
 };
 
+export interface CustomUser extends FirebaseUser {
+  accessToken: string;
+  name: string | null;
+  token: string;
+  stsTokenManager?: any; // Adjust based on your actual implementation
+}
+export interface User {
+  name: string | "";
+  email: string | "";
+  displayName?: string;
+  accessToken?: string;
+  token: string;
+  uid: string;
+  stsTokenManager: string;
+  expiresIn?: number;
+  emailVerified?: boolean;
+}
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 export const auth = getAuth(app);

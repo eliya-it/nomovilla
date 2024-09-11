@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import useHttp from "@hooks/http";
 import Meal from "@components/Meal/Meal";
 import Section from "@components/utils/Section";
@@ -23,7 +23,6 @@ const Meals: FunctionComponent = () => {
             <Meal
               name={meal.strMeal}
               photo={meal.strMealThumb}
-              tags={meal.strTags}
               category={meal.strCategory}
               key={meal.idMeal}
               id={meal.idMeal}

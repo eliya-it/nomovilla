@@ -1,16 +1,9 @@
-import React, { FunctionComponent, useState } from "react";
-import {
-  confirm,
-  btn,
-  message as msg,
-  btnsContainer,
-  yes,
-  no,
-} from "./Confirm.module.css";
+import { FunctionComponent, MouseEventHandler } from "react";
+import ConfirmCl from "./Confirm.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 interface Props {
-  onConfirm: Function;
-  onCancel: Function;
+  onConfirm: MouseEventHandler<HTMLButtonElement>;
+  onCancel: MouseEventHandler<HTMLButtonElement>;
   message: string;
   visible: boolean;
 }
@@ -43,18 +36,24 @@ const Confirm: FunctionComponent<Props> = ({
     <AnimatePresence>
       {visible && (
         <motion.div
-          className={confirm}
+          className={ConfirmCl.confirm}
           variants={confirmVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
-          <p className={msg}>{message}</p>
-          <div className={btnsContainer}>
-            <button onClick={onConfirm} className={`${btn + " " + yes}`}>
+          <p className={ConfirmCl.msg}>{message}</p>
+          <div className={ConfirmCl.btnsContainer}>
+            <button
+              onClick={onConfirm}
+              className={`${ConfirmCl.btn + " " + ConfirmCl.yes}`}
+            >
               Yes
             </button>
-            <button onClick={onCancel} className={`${btn + " " + no}`}>
+            <button
+              onClick={onCancel}
+              className={`${ConfirmCl.btn + " " + ConfirmCl.no}`}
+            >
               no
             </button>
           </div>

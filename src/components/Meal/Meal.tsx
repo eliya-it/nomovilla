@@ -1,13 +1,5 @@
-import React, { FunctionComponent, useState } from "react";
-import {
-  meal,
-  mealImg,
-  mealText,
-  mealHeading,
-  mealCategory,
-  mealActions,
-  mealLink,
-} from "./Meal.module.css";
+import { FunctionComponent, useState } from "react";
+import MealCl from "./Meal.module.css";
 
 import { Link } from "react-router-dom";
 import { MdBookmarkAdd } from "react-icons/md";
@@ -23,22 +15,15 @@ interface MealProps {
   name: string;
   category: string;
   photo: string;
-  tags: string[];
   id: string;
 }
 
-const Meal: FunctionComponent<MealProps> = ({
-  name,
-  category,
-  photo,
-  tags,
-  id,
-}) => {
+const Meal: FunctionComponent<MealProps> = ({ name, category, photo, id }) => {
   const { sendRequest } = useHttp();
   const { user } = useAuthContext();
   const [message, setMessage] = useState<{
     message: string | null;
-    status: string;
+    status: "success" | "fail";
   }>({
     message: null,
     status: "success",
@@ -51,7 +36,7 @@ const Meal: FunctionComponent<MealProps> = ({
         throw new Error("User is not authenticated");
       }
       sendRequest(
-        `${FB_APP_URL}/bookmarks/${userId}.json?auth=${user.token}`,
+        `${FB_APP_URL}/bookmarks/${userId}.json?auth=${user?.token}`,
         "POST",
         {
           id,
@@ -64,7 +49,7 @@ const Meal: FunctionComponent<MealProps> = ({
         message: `${name} Added to your bookmarks!`,
         status: "success",
       });
-    } catch (err) {
+    } catch (err: any) {
       setMessage({ message: err.response.data.error, status: "fail" });
     }
   };
@@ -78,21 +63,21 @@ const Meal: FunctionComponent<MealProps> = ({
         />
       )}
 
-      <div className={meal}>
-        <img src={photo} alt="meal img" className={mealImg} />
+      <div className={MealCl.meal}>
+        <img src={photo} alt="meal img" className={MealCl.mealImg} />
 
-        <div className={mealText}>
-          <h3 className={mealHeading}>{name}</h3>
-          <p className={mealCategory}>{category} </p>
+        <div className={MealCl.mealText}>
+          <h3 className={MealCl.mealHeading}>{name}</h3>
+          <p className={MealCl.mealCategory}>{category} </p>
 
-          <div className={mealActions}>
+          <div className={MealCl.mealActions}>
             {user ? (
               <Button className="btn--primary" onClick={handleBookmark}>
                 <MdBookmarkAdd className="icon" />
               </Button>
             ) : null}
 
-            <Link className={mealLink} to={`/meal/${id}`}>
+            <Link className={MealCl.mealLink} to={`/meal/${id}`}>
               View
             </Link>
           </div>

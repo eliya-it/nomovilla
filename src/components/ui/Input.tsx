@@ -1,23 +1,19 @@
-import React, {
+import {
   useState,
   useEffect,
   FunctionComponent,
   ChangeEventHandler,
+  ChangeEvent,
 } from "react";
-import {
-  input,
-  label as labelCl,
-  formControl,
-  error as errorCl,
-} from "./Input.module.css";
+import InputCl from "./Input.module.css";
 interface Props {
-  type?: "search" | "text" | "password";
+  type?: "email" | "search" | "text" | "password";
   placeholder?: string;
   id?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  val?: string;
+  val?: string | null;
   label?: string;
-  validationMsg?: string;
+  validationMsg?: string | null;
   name?: string;
   min?: number;
   max?: number;
@@ -25,6 +21,7 @@ interface Props {
   required?: boolean;
   isReset?: boolean;
   isConfirmPassword?: boolean;
+  className?: string;
 }
 const Input: FunctionComponent<Props> = ({
   type = "text",
@@ -34,16 +31,18 @@ const Input: FunctionComponent<Props> = ({
   val,
   label,
   name,
-  disabled,
+
   isReset,
   validationMsg,
   min = 5,
   max,
   required,
 }) => {
-  const [errMsg, setErrMsg] = useState<string>(validationMsg as string | "");
+  const [errMsg, setErrMsg] = useState<string | null>(
+    validationMsg as string | ""
+  );
   const checkValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-  const validateInput = (type, val) => {
+  const validateInput = (type: string, val: string) => {
     const minPassword = 8;
     if (type === "password" && val.length < minPassword) {
       return `Password must be between ${minPassword}-${32} characters.`;
@@ -56,10 +55,10 @@ const Input: FunctionComponent<Props> = ({
   };
 
   useEffect(() => {
-    setErrMsg(validationMsg);
+    setErrMsg(validationMsg || "");
   }, [validationMsg]);
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     const errorMsg = validateInput(type, val);
     setErrMsg(errorMsg);
@@ -69,7 +68,7 @@ const Input: FunctionComponent<Props> = ({
   const renderInput = () => {
     return (
       <input
-        className={!isReset && input}
+        className={!isReset ? InputCl.input : ""}
         type={type}
         placeholder={placeholder}
         id={id}
@@ -87,12 +86,12 @@ const Input: FunctionComponent<Props> = ({
   const isRequired = ["email", "name", "password"].includes(type);
   const requiredLabel = `${label ? `${isRequired ? `${label}*` : label}` : ""}`;
   return (
-    <div className={formControl}>
-      <label htmlFor={id} className={labelCl}>
+    <div className={InputCl.formControl}>
+      <label htmlFor={id} className={InputCl.label}>
         {requiredLabel}
       </label>
       {renderInput()}
-      {errMsg && <p className={errorCl}>{errMsg}</p>}
+      {errMsg && <p className={InputCl.error}>{errMsg}</p>}
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { copyright, copyrightText } from "./Copyright.module.css";
+import { FunctionComponent } from "react";
+import CopyrightCl from "./Copyright.module.css";
 import List from "@components/utils/List";
 import Item from "@components/utils/Item";
 import {
@@ -10,8 +10,8 @@ import {
 import CopyrightLink from "./CopyrightLink";
 const Copyright: FunctionComponent = () => {
   return (
-    <div className={copyright}>
-      <p className={copyrightText}>
+    <div className={CopyrightCl.copyright}>
+      <p className={CopyrightCl.copyrightText}>
         This project was developed by <strong>Eliya</strong> as part of his
         portfolio. <br /> &copy; All rights reserved.
       </p>

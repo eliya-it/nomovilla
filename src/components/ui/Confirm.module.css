@@ -4,6 +4,12 @@
   justify-content: center;
   flex-direction: column;
   gap: 1.2rem;
+  font-size: 1.5rem;
+  width: 40rem;
+  margin: 0 auto;
+  padding: 3.2rem 1.2rem;
+  background-color: var(--color-grey-light-4);
+  border-radius: var(--border-radius);
 }
 .btnsContainer {
   display: flex;
@@ -17,7 +23,7 @@
   cursor: pointer;
 }
 .yes {
-  color: rgb(24, 131, 65);
+  color: var(--color-success);
 }
 .no {
   color: var(--color-warn);

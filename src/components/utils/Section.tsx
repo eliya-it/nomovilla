@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import { section, sectionBorder } from "./Section.module.css";
+import { FunctionComponent, ReactNode } from "react";
+import SectionCl from "./Section.module.css";
 
 interface Props {
   className?: string;
@@ -16,8 +16,8 @@ const Section: FunctionComponent<Props> = ({
 }) => {
   return (
     <section
-      className={` ${!isReset ? section : ""} ${
-        isBorder ? sectionBorder : ""
+      className={` ${!isReset ? SectionCl.section : ""} ${
+        isBorder ? SectionCl.sectionBorder : ""
       } ${className ? className : ""}`}
     >
       {children}

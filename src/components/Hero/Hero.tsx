@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react";
-import { hero } from "./Hero.module.css";
+import { FunctionComponent } from "react";
+import HeroCl from "./Hero.module.css";
 
 const Hero: FunctionComponent = () => {
-  return <div className={hero}>&nbsp;</div>;
+  return <div className={HeroCl.hero}>&nbsp;</div>;
 };
 
 export default Hero;

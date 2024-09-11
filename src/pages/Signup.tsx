@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FunctionComponent, useEffect } from "react";
+import { ChangeEvent, FunctionComponent, useEffect } from "react";
 import { useState } from "react";
 import useAuthContext from "@hooks/useAuthContext";
 import Heading from "@components/common/Heading/Heading";
 import SignupForm from "@components/SignupForm/SignupForm";
 import useSignup from "@hooks/user/useSignup";
 import Message from "@ui/Message";
-import { sign } from "./Signup.module.css";
+import sign from "./Signup.module.css";
 interface UserData {
   email: string;
   password: string;
@@ -35,7 +35,7 @@ const Signup: FunctionComponent = () => {
   }, [userData]);
   if (!user) {
     return (
-      <div className={sign}>
+      <div className={sign.signup}>
         {error && <Message message={error} status="fail" />}
         <SignupForm
           onSignup={() => signup(userData.email, userData.password)}

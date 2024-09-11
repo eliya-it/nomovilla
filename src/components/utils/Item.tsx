@@ -1,6 +1,6 @@
-import React, { Component, FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode } from "react";
 interface Props {
-  className: string;
+  className?: string;
   children: ReactNode;
 }
 const Item: FunctionComponent<Props> = ({ className, children }) => {

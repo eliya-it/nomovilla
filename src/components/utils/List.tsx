@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react";
-import { list, colList } from "./List.module.css";
+import { FunctionComponent, ReactNode } from "react";
+import ListCl from "./List.module.css";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   isCol?: boolean;
 }
@@ -10,8 +10,8 @@ interface Props {
 const List: FunctionComponent<Props> = ({ children, className, isCol }) => {
   return (
     <ul
-      className={`${list} ${className ? className : ""} ${
-        isCol ? ` ${colList}` : ""
+      className={`${ListCl.list} ${className ? className : ""} ${
+        isCol ? ` ${ListCl.colList}` : ""
       }`}
     >
       {children}

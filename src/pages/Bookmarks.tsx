@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import useHttp from "@hooks/http";
 import Section from "@components/utils/Section";
 import useAuthContext from "@hooks/useAuthContext";
 import Bookmark from "@components/Bookmark/Bookmark";
-import { bookmarks } from "./Bookmarks.module.css";
+import BookmarksCl from "./Bookmarks.module.css";
 import { FB_APP_URL } from "@/config/config";
 import Loader from "@ui/Loader";
 import Heading from "@components/common/Heading/Heading";
@@ -14,58 +14,64 @@ const Bookmarks: FunctionComponent = () => {
   const { sendRequest: getBookmarks, data, error, isLoading } = useHttp();
   const {
     sendRequest: deleteBookmark,
-
     error: deleteBookmarkErr,
     isLoading: deleteBookmarkLoader,
   } = useHttp();
   const { user } = useAuthContext();
 
-  const handleDeleteBookmark = (id: string, userID: string) => {
-    deleteBookmark(
-      `${FB_APP_URL}/bookmarks/${userID}/${id}.json?auth=${user?.token}`,
-      "DELETE"
-    );
-  };
-
-  const fetchBookmarks = (userID: string | undefined) => {
-    if (user && !deleteBookmarkLoader) {
+  const fetchBookmarks = (userID: string | null) => {
+    if (user) {
       getBookmarks(
         `${FB_APP_URL}/bookmarks/${userID}.json?auth=${user?.token}`,
         "GET"
       );
     }
   };
+
+  const handleDeleteBookmark = async (id: string) => {
+    if (user) {
+      await deleteBookmark(
+        `${FB_APP_URL}/bookmarks/${user.uid}/${id}.json?auth=${user.token}`,
+        "DELETE"
+      );
+      // Re-fetch bookmarks after deletion
+      fetchBookmarks(user.uid);
+    }
+  };
+
   useEffect(() => {
-    fetchBookmarks(user?.id);
-  }, [user, deleteBookmarkLoader]);
+    if (user?.uid) {
+      fetchBookmarks(user.uid);
+    }
+  }, [user]);
+
+  // Determine if we are loading
+  const isLoadingAny = isLoading || deleteBookmarkLoader;
+  console.log(isLoadingAny);
+
   return (
     <PageTransition>
-      {error ||
-        (deleteBookmarkErr && (
-          <Message
-            message={
-              error?.response.data.error ||
-              deleteBookmarkErr?.response.data.error
-            }
-            status="fail"
-          />
-        ))}
-      <Section className={bookmarks}>
-        {!isLoading && !deleteBookmarkLoader && data !== null
-          ? Object.keys(data).map((key) => (
-              <Bookmark
-                loader={deleteBookmarkLoader}
-                key={key}
-                name={data[key].name}
-                photo={data[key].photo}
-                handleDelete={() => handleDeleteBookmark(key, user.id)}
-              />
-            ))
-          : null}
-        {deleteBookmarkLoader && <Loader isFull />}
-        {!isLoading && data === null ? (
+      <Section className={BookmarksCl.bookmarks}>
+        {error && <Message message={error} status="fail" />}
+        {deleteBookmarkErr && (
+          <Message message={deleteBookmarkErr} status="fail" />
+        )}
+
+        {isLoadingAny ? (
+          <Loader isFull />
+        ) : data && Object.keys(data).length > 0 ? (
+          Object.keys(data).map((key) => (
+            <Bookmark
+              key={key}
+              name={data[key].name}
+              loader={deleteBookmarkLoader}
+              photo={data[key].photo}
+              handleDelete={() => handleDeleteBookmark(key)}
+            />
+          ))
+        ) : (
           <Heading isSecond>There are no bookmarks at the moment. 😢</Heading>
-        ) : null}
+        )}
       </Section>
     </PageTransition>
   );

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface UsePaginationProps<T> {
   data: T[];
@@ -16,13 +16,10 @@ interface UsePaginationResult<T> {
 const usePagination = <T,>({
   data = [],
 }: UsePaginationProps<T>): UsePaginationResult<T> => {
-  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
-  const [curPage, setCurPage] = useState<number>(
-    parseInt(params.get("page") || "1", 10)
-  );
+  const [curPage] = useState<number>(parseInt(params.get("page") || "1", 10));
   const limit = 9;
-  const totalPages = Math.ceil(data.length / limit);
+  const totalPages = Math.ceil(data?.length / limit);
 
   const start = (curPage - 1) * limit; // Start from 0
   const end = start + limit; // 1 + 8 = 9, which is the data
@@ -51,7 +48,7 @@ const usePagination = <T,>({
   }, [params, setParams]);
 
   return {
-    meals: data.slice(start, end),
+    meals: data?.slice(start, end),
     totalPages,
     nextPage,
     prevPage,

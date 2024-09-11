@@ -7,7 +7,7 @@ interface Props {
   valMsg: string;
   onSignup: () => void;
   handleUserData: (e: ChangeEvent<HTMLInputElement>) => void; // Function to handle input changes
-  isLoading: boolean;
+  isLoading: boolean | null;
 }
 
 const SignupForm: React.FC<Props> = ({
@@ -44,7 +44,11 @@ const SignupForm: React.FC<Props> = ({
         name="confirmPassword"
         onChange={handleUserData}
       />
-      <Button text="Signup" disabled={valMsg !== ""} isLoading={isLoading} />
+      <Button
+        text="Signup"
+        disabled={valMsg !== ""}
+        isLoading={isLoading ?? false}
+      />
     </Form>
   );
 };

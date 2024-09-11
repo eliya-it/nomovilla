@@ -1,5 +1,5 @@
-import React, { ReactNode, FormEvent, FunctionComponent } from "react";
-import { form, colForm, formErr, formWidth } from "./Form.module.css";
+import { ReactNode, FormEvent, FunctionComponent } from "react";
+import FormCl from "./Form.module.css";
 
 interface Props {
   className?: string;
@@ -20,12 +20,12 @@ const Form: FunctionComponent<Props> = ({
 }) => {
   return (
     <form
-      className={`${form} ${className ? className : ""} ${
-        isCol ? colForm : ""
-      } ${!isFlex ? formWidth : ""}`}
+      className={`${FormCl.form} ${className ? className : ""} ${
+        isCol ? FormCl.colForm : ""
+      } ${!isFlex ? FormCl.formWidth : ""}`}
       onSubmit={onSubmit}
     >
-      <p className={formErr}>{valMsg}</p>
+      <p className={FormCl.formErr}>{valMsg}</p>
       {children}
     </form>
   );

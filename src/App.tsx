@@ -30,16 +30,12 @@ function App() {
         <Layout>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.key}>
-              <Route path="/" exact element={<Home />} />
-              <Route path="/login" exact element={<Login />} />
-              <Route path="/signup" exact element={<Signup />} />
-              <Route
-                path="/forgot-password"
-                exact
-                element={<ForgotPassword />}
-              />
-              <Route path="/meals" exact element={<Meals />} />
-              <Route path="/meal/:id" exact element={<Meal />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/meals" element={<Meals />} />
+              <Route path="/meal/:id" element={<Meal />} />
 
               {/* Protected Routes */}
               <Route
@@ -49,8 +45,8 @@ function App() {
                   </ProtectedRoutes>
                 }
               >
-                <Route path="/me" exact element={<Me />} />
-                <Route path="/bookmarks" exact element={<Bookmarks />} />
+                <Route path="/me" element={<Me />} />
+                <Route path="/bookmarks" element={<Bookmarks />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

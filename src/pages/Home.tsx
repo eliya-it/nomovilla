@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import Hero from "@components/Hero/Hero";
 import Testimonial from "@components/Testimonial/Testimonial";
 import Meals from "@components/Meals/Meals";

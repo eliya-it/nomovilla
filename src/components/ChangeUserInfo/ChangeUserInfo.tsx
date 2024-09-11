@@ -1,37 +1,37 @@
-import React, {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  FunctionComponent,
-} from "react";
+import { useState, ChangeEvent, FormEvent, FunctionComponent } from "react";
 import Section from "@components/utils/Section";
 import Form from "@ui/Form";
 import Input from "@ui/Input";
 import Button from "@components/utils/Button";
-import { auth } from "@/firebase";
+import { auth, User } from "@/firebase";
 import { updateProfile } from "firebase/auth";
 import useAuthContext from "@hooks/useAuthContext";
 import useLocalStorage from "@hooks/useLocalStorage";
 import useFirebaseError from "@hooks/useFirebaseError";
 import useAsync from "@hooks/useAsync";
 import Message from "@ui/Message";
-
 interface UserData {
   name: string | null;
   email: string | null;
+  uid?: string;
+  token: string;
+  expiresIn?: number;
+  stsTokenManager?: any;
 }
 
 const ChangeUserInfo: FunctionComponent = () => {
   const [user, setUser] = useLocalStorage<UserData>("user");
   const currentAuthUser = auth.currentUser;
-  const { dispatch } = useAuthContext();
-  const { handleFirebaseErr, error } = useFirebaseError();
+  const { dispatch, update } = useAuthContext();
+  const { handleFirebaseErr } = useFirebaseError();
 
   const { dispatch: dispatchAsync, message, isLoading } = useAsync();
 
   const [userData, setUserData] = useState<UserData>({
-    name: null,
-    email: null,
+    name: user?.name || "",
+    email: user?.email || "",
+    token: user?.token || "",
+    expiresIn: 0,
   });
 
   const changeName = async (e: FormEvent<HTMLFormElement>) => {
@@ -40,25 +40,27 @@ const ChangeUserInfo: FunctionComponent = () => {
       dispatchAsync({
         type: "SEND",
       });
-      await updateProfile(auth.currentUser, {
-        displayName: userData.name,
-      });
-      const userObj = {
-        name: currentAuthUser.displayName,
-        email: currentAuthUser.email,
-        id: currentAuthUser.uid,
-        token: currentAuthUser.accessToken,
-      };
 
-      dispatch({
-        type: "UPDATE",
-        user: userObj,
-      });
-      dispatchAsync({
-        type: "RESPONSE",
-        message: "Name updated successfully!",
-      });
-      setUser(userObj);
+      if (currentAuthUser) {
+        await updateProfile(currentAuthUser, {
+          displayName: userData.name || "",
+        });
+
+        const userObj: User = {
+          name: currentAuthUser.displayName as string,
+          email: currentAuthUser.email || "",
+          uid: currentAuthUser.uid,
+          token: await currentAuthUser.getIdToken(),
+          stsTokenManager: (currentAuthUser as any).stsTokenManager,
+        };
+
+        update(userObj);
+        dispatchAsync({
+          type: "RESPONSE",
+          message: "Name updated successfully!",
+        });
+        setUser(userObj);
+      }
     } catch (err) {
       dispatch({
         type: "ERROR",
@@ -68,7 +70,7 @@ const ChangeUserInfo: FunctionComponent = () => {
   };
 
   const hanldeUserData = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, id } = e.target;
+    const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
@@ -91,7 +93,7 @@ const ChangeUserInfo: FunctionComponent = () => {
           onChange={hanldeUserData}
           disabled
         />
-        <Button text="Update" isLoading={isLoading} />
+        <Button text="Update" isLoading={isLoading ?? false} />
       </Form>
     </Section>
   );

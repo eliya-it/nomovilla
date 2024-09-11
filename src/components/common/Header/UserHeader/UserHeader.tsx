@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 
-import { authLink, username, userHeader } from "./UserHeader.module.css";
+import UserHeaderCl from "./UserHeader.module.css";
 import { Link } from "react-router-dom";
 import List from "@components/utils/List";
 import Item from "@components/utils/Item";
@@ -9,22 +9,22 @@ const UserHeader: FunctionComponent = () => {
   const { user } = useAuthContext();
 
   return (
-    <nav className={userHeader}>
+    <nav className={UserHeaderCl.userHeader}>
       {!user ? (
         <List>
           <Item>
-            <Link to="/login" className={authLink}>
+            <Link to="/login" className={UserHeaderCl.authLink}>
               Login
             </Link>
           </Item>{" "}
           <Item>
-            <Link to="/signup" className={authLink}>
+            <Link to="/signup" className={UserHeaderCl.authLink}>
               Signup
             </Link>
           </Item>
         </List>
       ) : (
-        <p className={username}>{user.name || user.email}</p>
+        <p className={UserHeaderCl.username}>{user.name || user.email}</p>
       )}
     </nav>
   );

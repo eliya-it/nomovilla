@@ -1,19 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  MouseEvent,
-  FunctionComponent,
-} from "react";
-import {
-  sidebar,
-  sidebarList,
-  icon,
-  overlay,
-  overlayScaled,
-  logoutBtn,
-  menuBtn,
-  sidebarListActive,
-} from "./Sidebar.module.css";
+import { useState, useEffect, FunctionComponent } from "react";
+import SidebarCl from "./Sidebar.module.css";
 import {
   MdBookmark,
   MdDashboard,
@@ -25,31 +11,17 @@ import {
 import List from "@components/utils/List";
 import Item from "@components/utils/Item";
 import useAuthContext from "@hooks/useAuthContext";
-
-import { useNavigate } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 import Copyright from "@components/Copyright/Copyright";
 
 import { auth } from "@/firebase";
 
 const Sidebar: FunctionComponent = () => {
-  const { dispatch, user: curUserAuth } = useAuthContext();
-
-  const navigate = useNavigate();
+  const { user, user: curUserAuth, logout } = useAuthContext();
   const [show, setShow] = useState(false);
 
   const toggleMenu = () => {
     setShow(!show);
-  };
-
-  const logout = () => {
-    // 1) Remove user from localStorage
-    localStorage.removeItem("user");
-    // 2) Set user to null in auth context
-    dispatch({
-      type: "LOGOUT",
-    });
-    navigate("/login");
   };
 
   // Auto logout
@@ -65,42 +37,48 @@ const Sidebar: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    autoLogout(auth.currentUser?.stsTokenManager?.expirationTime);
+    if (user?.token) autoLogout(user.expiresIn);
   }, [auth?.currentUser]);
 
   return (
     <>
-      <nav className={sidebar}>
-        <button onClick={toggleMenu} className={menuBtn}>
+      <nav className={SidebarCl.sidebar}>
+        <button onClick={toggleMenu} className={SidebarCl.menuBtn}>
           <MdMenu />
         </button>
-        <div className={`${overlay} ${show ? overlayScaled : ""}`}></div>
+        <div
+          className={`${SidebarCl.overlay} ${
+            show ? SidebarCl.overlayScaled : ""
+          }`}
+        ></div>
         <List
-          className={`${sidebarList} ${show ? sidebarListActive : ""}`}
+          className={`${SidebarCl.sidebarList} ${
+            show ? SidebarCl.sidebarListActive : ""
+          }`}
           isCol
         >
           <SidebarLink to="/">
-            <MdHome className={icon} />
+            <MdHome className={SidebarCl.icon} />
             <span>Home</span>
           </SidebarLink>
           <SidebarLink to="/meals">
-            <MdRestaurant className={icon} />
+            <MdRestaurant className={SidebarCl.icon} />
             <span>Meals</span>
           </SidebarLink>
 
           {curUserAuth ? (
             <>
               <SidebarLink to="/me">
-                <MdDashboard className={icon} />
+                <MdDashboard className={SidebarCl.icon} />
                 <span>Dashboard</span>
               </SidebarLink>
               <SidebarLink to="/bookmarks">
-                <MdBookmark className={icon} />
+                <MdBookmark className={SidebarCl.icon} />
                 <span>Bookmarks</span>
               </SidebarLink>
-              <Item className="sidebar__item" text="Home" link="#">
-                <button onClick={logout} className={logoutBtn}>
-                  <MdLogout className={icon} />
+              <Item className="sidebar__item">
+                <button onClick={logout} className={SidebarCl.logoutBtn}>
+                  <MdLogout className={SidebarCl.icon} />
                   Logout
                 </button>
               </Item>

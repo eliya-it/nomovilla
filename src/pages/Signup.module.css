@@ -1,4 +1,4 @@
-.sign {
+.signup {
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.1);
   padding: 6.4rem 3.2rem;
   border-radius: var(--border-radius);
@@ -15,7 +15,7 @@
   width: 100%;
 }
 @media only screen and (max-width: 52.5em) {
-  .sign {
+  .signup {
     width: 90%;
   }
 }

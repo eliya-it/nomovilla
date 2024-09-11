@@ -1,17 +1,13 @@
-import React, {
-  useState,
-  useEffect,
-  ChangeEvent,
-  FunctionComponent,
-} from "react";
+import { useState, useEffect, ChangeEvent, FunctionComponent } from "react";
 import { FaSearch } from "react-icons/fa";
 import SearchResult from "@components/SearchResults/SearchResult";
 import SearchResults from "@components/SearchResults/SearchResults";
 import useHttp from "@hooks/http";
-
+import { v4 as uuid } from "uuid";
 import Form from "@ui/Form";
 import Input from "@ui/Input";
-import { search, searchInput, searchBtn } from "./SearchBar.module.css";
+import SearchBarCl from "./SearchBar.module.css";
+import Message from "@/components/ui/Message";
 
 interface Meal {
   idMeal: string;
@@ -25,7 +21,7 @@ interface ApiResponse {
 
 const Search: FunctionComponent = () => {
   const [name, setName] = useState<string>("");
-  const { isLoading, sendRequest, error, data, clear } = useHttp<ApiResponse>();
+  const { isLoading, sendRequest, data, error } = useHttp<ApiResponse>();
 
   let timer: NodeJS.Timeout;
 
@@ -44,17 +40,18 @@ const Search: FunctionComponent = () => {
   }, [name, sendRequest]);
 
   return (
-    <div className={search}>
+    <div className={SearchBarCl.search}>
+      {error && <Message message={error} status="fail" key={uuid()} />}
       <Form>
         <Input
           name="search"
-          className={searchInput}
+          className={SearchBarCl.searchInput}
           placeholder="Pizza, Salad,..."
           type="search"
           onChange={handleSearchInput}
         />
 
-        <button className={searchBtn}>
+        <button className={SearchBarCl.searchBtn}>
           <FaSearch />
         </button>
       </Form>

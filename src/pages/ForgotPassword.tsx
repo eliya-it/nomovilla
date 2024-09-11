@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { forgotPassword } from "./ForgotPassword.module.css";
+import ForgotPasswordCl from "./ForgotPassword.module.css";
 import Input from "@ui/Input";
 import Form from "@ui/Form";
 import Section from "@components/utils/Section";
@@ -29,7 +29,7 @@ const ForgotPassword: FunctionComponent = () => {
   return (
     <Section>
       {error && <Message message={error} status="fail" />}
-      <div className={forgotPassword}>
+      <div className={ForgotPasswordCl.forgotPassword}>
         <h3 className="heading--tertiary">Forgot your password?</h3>
         <Heading isForth>Enter your email below to reset it.</Heading>
         <Form onSubmit={handleForgotPassword} isCol>

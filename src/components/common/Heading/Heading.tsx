@@ -1,5 +1,5 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import { second, third, forth } from "./Heading.module.css";
+import { FunctionComponent, ReactNode } from "react";
+import HeadingCl from "./Heading.module.css";
 
 interface Props {
   isSecond?: boolean;
@@ -16,9 +16,9 @@ const Heading: FunctionComponent<Props> = ({
 }) => {
   return (
     <>
-      {isSecond && <h2 className={second}>{children}</h2>}{" "}
-      {isThird && <h3 className={third}>{children}</h3>}{" "}
-      {isForth && <h4 className={forth}>{children}</h4>}
+      {isSecond && <h2 className={HeadingCl.second}>{children}</h2>}{" "}
+      {isThird && <h3 className={HeadingCl.third}>{children}</h3>}{" "}
+      {isForth && <h4 className={HeadingCl.corth}>{children}</h4>}
     </>
   );
 };

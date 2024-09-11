@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { FunctionComponent, ReactNode } from "react";
 import useAuthContext from "@hooks/useAuthContext";
 import Heading from "@components/common/Heading/Heading";
 interface Props {

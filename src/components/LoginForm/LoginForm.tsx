@@ -1,9 +1,9 @@
-import React, { ChangeEventHandler, FormEvent, FunctionComponent } from "react";
+import { ChangeEventHandler, FormEvent, FunctionComponent } from "react";
 import Input from "@ui/Input";
 import Form from "@ui/Form";
 import Button from "@components/utils/Button";
 import { Link } from "react-router-dom";
-import { formText, formLink } from "./LoginForm.module.css";
+import LoginCl from "./LoginForm.module.css";
 interface Props {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   dataCb: ChangeEventHandler<HTMLInputElement>;
@@ -36,9 +36,9 @@ const LoginForm: FunctionComponent<Props> = ({
         onChange={dataCb}
       />
       <Button text="Login" isLoading={isLoading} disabled={disabled} />
-      <p className={formText}>
+      <p className={LoginCl.formText}>
         Forgot your password?, no problem click{" "}
-        <Link to="/forgot-password" className={formLink}>
+        <Link to="/forgot-password" className={LoginCl.formLink}>
           Reset
         </Link>
         .

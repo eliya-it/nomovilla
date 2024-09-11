@@ -1,11 +1,11 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import { content } from "./Content.module.css";
+import { FunctionComponent, ReactNode } from "react";
+import ContentCl from "./Content.module.css";
 
 interface Props {
   children: ReactNode;
 }
 
 const Content: FunctionComponent<Props> = ({ children }) => {
-  return <div className={content}>{children}</div>;
+  return <div className={ContentCl.content}>{children}</div>;
 };
 export default Content;

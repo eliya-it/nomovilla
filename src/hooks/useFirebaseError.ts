@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useFirebaseError = () => {
   const [error, setErr] = useState("");

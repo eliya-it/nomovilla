@@ -62,12 +62,14 @@ const reducer = <T>(
 interface UseAsyncReturn<T> {
   dispatch: React.Dispatch<AsyncAction<T>>;
   error: string | null;
-  isLoading: boolean;
+  isLoading: boolean | null;
   message: string | null;
 }
 
 const useAsync = <T>(): UseAsyncReturn<T> => {
   const [res, dispatch] = useReducer(reducer, initialState);
+  console.log(res);
+
   return {
     dispatch,
     error: res.error,

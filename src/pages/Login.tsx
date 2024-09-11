@@ -1,10 +1,5 @@
-import React, {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  FunctionComponent,
-} from "react";
-import { login } from "./Login.module.css";
+import { useState, ChangeEvent, FormEvent, FunctionComponent } from "react";
+import LoginCl from "./Login.module.css";
 import Message from "@ui/Message";
 import useAuthContext from "@hooks/useAuthContext";
 import Heading from "@components/common/Heading/Heading";
@@ -30,7 +25,7 @@ const Login: FunctionComponent = () => {
   };
   if (!curAuthUser) {
     return (
-      <div className={login}>
+      <div className={LoginCl.login}>
         {error && <Message message={error} status="fail" key={uuid()} />}
         <LoginForm
           dataCb={handleUserData}

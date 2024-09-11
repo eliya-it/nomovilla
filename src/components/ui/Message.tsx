@@ -1,10 +1,6 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { message as messageCl, messageError } from "./Message.module.css";
+import { FunctionComponent, useEffect, useState } from "react";
+import MessageCl from "./Message.module.css";
 import { AnimatePresence, motion } from "framer-motion";
-interface MessageProps {
-  message: string | any;
-  status?: "success" | "fail";
-}
 const messageVariants = {
   hidden: {
     y: "-40vh",
@@ -28,6 +24,11 @@ const messageVariants = {
     },
   },
 };
+interface MessageProps {
+  message: string | any;
+  status?: "success" | "fail";
+}
+
 const Message: FunctionComponent<MessageProps> = ({
   message,
   status = "success",
@@ -49,7 +50,9 @@ const Message: FunctionComponent<MessageProps> = ({
             initial="initial"
             animate="visible"
             exit="exit"
-            className={`${messageCl}  ${status === "fail" ? messageError : ""}`}
+            className={`${MessageCl.message}  ${
+              status === "fail" ? MessageCl.messageError : ""
+            }`}
             onClick={hide}
           >
             {message}

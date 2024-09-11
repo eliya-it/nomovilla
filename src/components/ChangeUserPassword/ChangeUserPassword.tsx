@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  FunctionComponent,
-} from "react";
+import { useState, ChangeEvent, FormEvent, FunctionComponent } from "react";
 import Section from "@components/utils/Section";
 import Form from "@ui/Form";
 import Input from "@ui/Input";
@@ -14,19 +9,23 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   updatePassword,
+  User,
+  UserCredential,
 } from "firebase/auth";
 import useLocalStorage from "@hooks/useLocalStorage";
 import useAsync from "@hooks/useAsync";
 import Message from "@ui/Message";
 import usePasswordValidator from "@hooks/usePasswordValidator";
 interface UserData {
-  name: string;
-  email: string;
-  curPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+  name: string | undefined;
+  email: string | undefined;
+  curPassword?: string;
+  newPassword?: string;
+  confirmNewPassword?: string;
+  expiresIn: number; // This property is required
   token: string;
 }
+
 const ChangeUserPassword: FunctionComponent = () => {
   const [user, setUser] = useLocalStorage<UserData>("user");
   const { dispatch, message, isLoading, error } = useAsync();
@@ -38,6 +37,7 @@ const ChangeUserPassword: FunctionComponent = () => {
     curPassword: "",
     newPassword: "",
     confirmNewPassword: "",
+    expiresIn: 0,
     token: user?.token || "",
   });
 
@@ -63,16 +63,20 @@ const ChangeUserPassword: FunctionComponent = () => {
       if (curUser) {
         const cred = EmailAuthProvider.credential(
           curUser.email as string,
-          userData.curPassword
+          userData.curPassword as string
         );
-        const { user } = await reauthenticateWithCredential(curUser, cred);
+        const userCredential: UserCredential =
+          await reauthenticateWithCredential(curUser, cred);
+        const user: User = userCredential.user as User;
+        const stsTokenManager = (user as any).stsTokenManager;
+
         setUser({
           name: user.displayName || "",
           email: user.email || "",
-          token: user?.accessToken || "",
-          expiresIn: auth.currentUser?.stsTokenManager.expirationTime,
+          token: await user.getIdToken(),
+          expiresIn: stsTokenManager.expirationTime, // Ensure this property is included
         });
-        await updatePassword(curUser, userData.newPassword);
+        await updatePassword(curUser, userData.newPassword || "");
         dispatch({
           type: "RESPONSE",
           message: "Password updated successfully!",
@@ -121,7 +125,7 @@ const ChangeUserPassword: FunctionComponent = () => {
         />
         <Button
           text="Update"
-          isLoading={isLoading}
+          isLoading={isLoading ?? false}
           disabled={!passwordValidation.isFormValid}
         />
       </Form>

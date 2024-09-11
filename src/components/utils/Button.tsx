@@ -1,5 +1,5 @@
-import React, { ReactNode, MouseEventHandler, FunctionComponent } from "react";
-import { btn, btnPrimary, btnRow } from "./Button.module.css";
+import { ReactNode, MouseEventHandler, FunctionComponent } from "react";
+import ButtonCl from "./Button.module.css";
 
 interface ButtonProps {
   disabled?: boolean;
@@ -24,14 +24,14 @@ const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${isReset ? "" : `${btn} ${btnPrimary}`} ${
+      className={`${isReset ? "" : `${ButtonCl.btn} ${ButtonCl.btnPrimary}`} ${
         className ? className : ""
-      } ${isRow ? btnRow : ""}`}
+      } ${isRow ? ButtonCl.btnRow : ""}`}
       onClick={onClick}
       disabled={disabled}
     >
       {isLoading ? "Loading..." : text}
-      {/* {children} */}
+      {children}
     </button>
   );
 };

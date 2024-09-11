@@ -7,7 +7,7 @@ import Grid from "@hoc/Layout/Grid";
 import useHttp from "@hooks/http";
 import Loader from "@ui/Loader";
 import Message from "@ui/Message";
-import { mealsSearch, mealsText } from "./Meals.module.css";
+import MealsCl from "./Meals.module.css";
 import MealsBtns from "@components/MealsBtns/MealsBtns";
 import Section from "@components/utils/Section";
 import { motion } from "framer-motion";
@@ -29,6 +29,7 @@ const MealsName: FunctionComponent = () => {
   const [mealName, setMealName] = useState<string>("");
   const [isAnimated, setIsAnimated] = useState<boolean>(false);
   const typingTimer = useRef<NodeJS.Timeout | null>(null);
+
   const handlleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (typingTimer.current) {
@@ -48,11 +49,13 @@ const MealsName: FunctionComponent = () => {
   useEffect(() => {
     setIsAnimated(true);
   }, []);
+  console.log(error);
+
   return (
     <>
-      {error ? <Message message={error.message} status="fail" /> : null}
+      {error ? <Message message={error} status="fail" /> : null}
       <Section>
-        <div className={mealsSearch}>
+        <div className={MealsCl.mealsSearch}>
           <Form>
             <Input
               placeholder="Pizza, Sushi,..."
@@ -60,7 +63,7 @@ const MealsName: FunctionComponent = () => {
               onChange={handlleNameChange}
             />
           </Form>
-          <p className={mealsText}>{`${
+          <p className={MealsCl.mealsText}>{`${
             !isLoading
               ? `${
                   data?.meals

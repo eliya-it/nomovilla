@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import Button from "@components/utils/Button";
-import { btnsContainer, btn } from "./MealsBtns.module.css";
+import MealsBtnsCl from "./MealsBtns.module.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 interface Props {
   curPage: number;
@@ -17,10 +17,10 @@ const MealsBtn: FunctionComponent<Props> = ({
   isMealsNull,
 }) => {
   return (
-    <div className={btnsContainer}>
+    <div className={MealsBtnsCl.btnsContainer}>
       {" "}
       <Button
-        className={`${btn}`}
+        className={`${MealsBtnsCl.btn}`}
         disabled={curPage === 1 || isMealsNull}
         onClick={onPrevPage}
         isReset
@@ -28,7 +28,7 @@ const MealsBtn: FunctionComponent<Props> = ({
         <MdChevronLeft />
       </Button>{" "}
       <Button
-        className={`${btn}`}
+        className={`${MealsBtnsCl.btn}`}
         onClick={onNextPage}
         disabled={curPage >= totalPages || isMealsNull}
         isReset

@@ -1,5 +1,5 @@
-import React, { Component, FunctionComponent } from "react";
-import { header, logo } from "./Header.module.css";
+import { FunctionComponent } from "react";
+import Header from "./Header.module.css";
 import Logo from "@assets/img/logo.png";
 
 import SearchBar from "./SearchBar/SearchBar";
@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 
 const Showcase: FunctionComponent = () => {
   return (
-    <header className={header}>
+    <header className={Header.header}>
       <Link to="/">
-        <img className={logo} src={Logo} />
+        <img className={Header.logo} src={Logo} />
       </Link>
       <SearchBar />
       <UserHeader />

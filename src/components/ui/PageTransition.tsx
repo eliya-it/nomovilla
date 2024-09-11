@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { PageVariants } from "@components/utils/Variants";
 
