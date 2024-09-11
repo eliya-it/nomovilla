@@ -35,7 +35,7 @@ export interface AuthContextType {
   loading: boolean; // Indicates if the authentication state is being loaded
   dispatch: Dispatch<AuthAction>; // Dispatch function for actions
   login: (user: User) => void; // Function to log in a user
-  update: (user: User) => void; // Function to lupdate the user
+  update: (user: User) => void; // Function to update the user
   logout: () => void; // Function to log out the user
 }
 
@@ -54,8 +54,6 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     case "DELETE":
       return { user: null };
     case "UPDATE":
-      console.log(action.user);
-
       return { user: action.user || state.user };
     default:
       return state;
@@ -77,7 +75,6 @@ export const AuthContextProvider: FunctionComponent<
   // Effect to handle user login based on local storage
   useEffect(() => {
     if (user?.token) {
-      console.log("Logging user in from authContext...");
       dispatch({ type: "LOGIN", user });
     }
   }, [user?.token]);

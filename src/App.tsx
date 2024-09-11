@@ -1,3 +1,6 @@
+import "./styles/variables.css";
+import "./styles/typography.css";
+import "./index.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Meal from "@pages/Meal";
 import Home from "@pages/Home";
@@ -12,8 +15,6 @@ import Layout from "@hoc/Layout/Layout";
 import { useEffect, useState } from "react";
 import ProtectedRoutes from "@hoc/ProtectedRoutes";
 import AuthContainer from "@hoc/AuthContainer";
-import "./styles/Variables.module.css";
-import "./styles/Typography.module.css";
 import NotFound from "@pages/NotFound";
 import { AnimatePresence } from "framer-motion";
 

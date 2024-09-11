@@ -68,8 +68,6 @@ interface UseAsyncReturn<T> {
 
 const useAsync = <T>(): UseAsyncReturn<T> => {
   const [res, dispatch] = useReducer(reducer, initialState);
-  console.log(res);
-
   return {
     dispatch,
     error: res.error,

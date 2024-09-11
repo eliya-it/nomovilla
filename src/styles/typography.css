@@ -4,3 +4,9 @@ body {
   line-height: 1.65;
   color: var(--color-grey-dark-3);
 }
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-1);
+  line-height: 1.65;
+  color: var(--color-grey-dark-3);
+}

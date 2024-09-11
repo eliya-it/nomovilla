@@ -42,10 +42,11 @@ const useSignup = (): UseSignupReturn => {
           name: user.displayName || email, // Fallback to email if displayName is not set
           email: user.email as string,
           isVerified: user.emailVerified || "",
-          token: user.accessToken || "", // Now this property exists
+          token: user.accessToken || "",
           uid: user.uid,
           expiresIn: stsTokenManager.expirationTime,
         };
+
         setUser(userObj);
         disptachUser({
           type: "SIGNUP",
