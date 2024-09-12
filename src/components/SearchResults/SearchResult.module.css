@@ -1,7 +1,6 @@
 .result {
   display: flex;
-
-  padding: 3.8rem 1.6rem;
+  padding: 3.2rem 1.6rem;
   gap: 1.6rem;
   transition: transform 450ms ease;
   overflow: hidden;

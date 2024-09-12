@@ -87,9 +87,11 @@ const Input: FunctionComponent<Props> = ({
   const requiredLabel = `${label ? `${isRequired ? `${label}*` : label}` : ""}`;
   return (
     <div className={InputCl.formControl}>
-      <label htmlFor={id} className={InputCl.label}>
-        {requiredLabel}
-      </label>
+      {label && (
+        <label htmlFor={id} className={InputCl.label}>
+          {requiredLabel}
+        </label>
+      )}
       {renderInput()}
       {errMsg && <p className={InputCl.error}>{errMsg}</p>}
     </div>

@@ -6,6 +6,8 @@
   gap: 3.2rem;
   width: 100%;
   height: 100%;
+  align-items: center; /* Add this line */
+  justify-content: center; /* Add this line */
 }
 
 .searchInput {
@@ -43,7 +45,7 @@
   justify-content: center;
   top: 50%;
   right: 0;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* Change this line */
   cursor: pointer;
   border: none;
   color: currentColor;

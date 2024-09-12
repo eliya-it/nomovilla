@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FunctionComponent } from "react";
+import { useState, ChangeEvent, FunctionComponent } from "react";
 import { FaSearch } from "react-icons/fa";
 import SearchResult from "@components/SearchResults/SearchResult";
 import SearchResults from "@components/SearchResults/SearchResults";
@@ -22,22 +22,20 @@ interface ApiResponse {
 const Search: FunctionComponent = () => {
   const [name, setName] = useState<string>("");
   const { isLoading, sendRequest, data, error } = useHttp<ApiResponse>();
-
   let timer: NodeJS.Timeout;
-
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>): void => {
     clearTimeout(timer);
-    timer = setTimeout(() => setName(e.target.value), 1000);
-  };
-
-  useEffect(() => {
-    if (name) {
-      sendRequest(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`,
-        "GET"
-      );
+    const searchValue = e.target.value;
+    setName(searchValue);
+    if (searchValue) {
+      timer = setTimeout(() => {
+        sendRequest(
+          `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchValue}`,
+          "GET"
+        );
+      }, 1000);
     }
-  }, [name, sendRequest]);
+  };
 
   return (
     <div className={SearchBarCl.search}>
@@ -50,7 +48,6 @@ const Search: FunctionComponent = () => {
           type="search"
           onChange={handleSearchInput}
         />
-
         <button className={SearchBarCl.searchBtn}>
           <FaSearch />
         </button>
@@ -58,8 +55,10 @@ const Search: FunctionComponent = () => {
 
       {name !== "" && (
         <SearchResults>
-          {!isLoading && data?.meals
-            ? data.meals.map((meal) => (
+          {isLoading
+            ? "Loading...."
+            : data?.meals !== null && !isLoading
+            ? data?.meals.map((meal) => (
                 <SearchResult
                   key={meal.idMeal}
                   id={meal.idMeal}
@@ -67,7 +66,7 @@ const Search: FunctionComponent = () => {
                   photo={`${meal.strMealThumb}/preview`}
                 />
               ))
-            : "Loading...."}
+            : "There are no meals with this name"}
         </SearchResults>
       )}
     </div>

@@ -18,7 +18,7 @@ interface UseSignupReturn {
 }
 const useSignup = (): UseSignupReturn => {
   const { dispatch, isLoading } = useAsync();
-  const { dispatch: disptachUser } = useAuthContext();
+  const { signup: dispatchSignup } = useAuthContext();
   const [_, setUser] = useLocalStorage("user");
   const navigate = useNavigate();
   const { handleFirebaseErr, error } = useFirebaseError();
@@ -48,10 +48,7 @@ const useSignup = (): UseSignupReturn => {
         };
 
         setUser(userObj);
-        disptachUser({
-          type: "SIGNUP",
-          user: userObj,
-        });
+        dispatchSignup(userObj);
         navigate("/");
       }
     } catch (err) {

@@ -35,6 +35,7 @@ export interface AuthContextType {
   loading: boolean; // Indicates if the authentication state is being loaded
   dispatch: Dispatch<AuthAction>; // Dispatch function for actions
   login: (user: User) => void; // Function to log in a user
+  signup: (user: User) => void; // Function to signup  a user
   update: (user: User) => void; // Function to update the user
   logout: () => void; // Function to log out the user
 }
@@ -83,6 +84,10 @@ export const AuthContextProvider: FunctionComponent<
     setUser(user);
     dispatch({ type: "LOGIN", user });
   };
+  const signup = (user: User) => {
+    setUser(user);
+    dispatch({ type: "SIGNUP", user });
+  };
 
   // Logout function to dispatch logout action
   const logout = () => {
@@ -98,7 +103,7 @@ export const AuthContextProvider: FunctionComponent<
   // Provide context value to children components
   return (
     <AuthContext.Provider
-      value={{ user, loading: false, dispatch, login, logout, update }}
+      value={{ user, loading: false, dispatch, login, logout, update, signup }}
     >
       {children}
     </AuthContext.Provider>

@@ -25,7 +25,7 @@ const Form: FunctionComponent<Props> = ({
       } ${!isFlex ? FormCl.formWidth : ""}`}
       onSubmit={onSubmit}
     >
-      <p className={FormCl.formErr}>{valMsg}</p>
+      {valMsg && <p className={FormCl.formErr}>{valMsg}</p>}
       {children}
     </form>
   );

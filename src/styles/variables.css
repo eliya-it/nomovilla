@@ -35,6 +35,7 @@
   /* // Shadows */
   --shadow-primary: 0 2rem 6rem rgba(--color-black, 0.12);
   /* // Borders */
+  --border: 0.1rem solid #e9e9e9;
   --border-radius: 0.8rem;
   --border-radius--img: 2.4rem;
   /* // Transitions */

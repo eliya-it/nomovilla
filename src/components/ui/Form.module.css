@@ -5,7 +5,7 @@
   width: 100%;
 }
 .form:not(:last-child) {
-  margin-bottom: 3.6rem;
+  /* margin-bottom: 3.6rem; */
 }
 .colForm {
   flex-direction: column;
