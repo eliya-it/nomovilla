@@ -49,7 +49,6 @@ const MealsName: FunctionComponent = () => {
   useEffect(() => {
     setIsAnimated(true);
   }, []);
-  console.log(error);
 
   return (
     <>

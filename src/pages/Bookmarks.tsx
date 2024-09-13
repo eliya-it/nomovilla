@@ -47,7 +47,6 @@ const Bookmarks: FunctionComponent = () => {
 
   // Determine if we are loading
   const isLoadingAny = isLoading || deleteBookmarkLoader;
-  console.log(isLoadingAny);
 
   return (
     <PageTransition>
